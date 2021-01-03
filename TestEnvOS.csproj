@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.0</TargetFramework>
+        <RuntimeIdentifier>cosmos</RuntimeIdentifier>
+        <SelfContained>True</SelfContained>
+        <BinFormat>ELF</BinFormat>
+        <StackCorruptionDetectionEnabled>True</StackCorruptionDetectionEnabled>
+        <StackCorruptionDetectionLevel>MethodFooters</StackCorruptionDetectionLevel>
+        <Deployment>ISO</Deployment>
+        <DebugEnabled>True</DebugEnabled>
+        <DebugMode>Source</DebugMode>
+        <IgnoreDebugStubAttribute>False</IgnoreDebugStubAttribute>
+        <ISOFile>bin\Debug\netcoreapp2.0\cosmos\Test_PS2.iso</ISOFile>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <EnableGDB>False</EnableGDB>
+        <StartCosmosGDB>False</StartCosmosGDB>
+        <VisualStudioDebugPort>Pipe: Cosmos\Serial</VisualStudioDebugPort>
+        <CosmosDebugPort>Serial: COM1</CosmosDebugPort>
+        <Launch>VMware</Launch>
+        <Profile>VMware</Profile>
+        <Description>Use VMware Player or Workstation to deploy and debug.</Description>
+        <PxeInterface>192.168.0.8</PxeInterface>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <DebugEnabled>False</DebugEnabled>
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="test_softwares_sources\test.o" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="test_softwares_sources\test.o" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Cosmos.Build" Version="0.1.0-localbuild20201129120042" NoWarn="NU1604">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Cosmos.Debug.Kernel" Version="0.1.0-localbuild20201129120042" NoWarn="NU1604" />
+        <PackageReference Include="Cosmos.System2" Version="0.1.0-localbuild20201129120042" NoWarn="NU1604" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="XSharp">
+        <HintPath>..\..\..\AppData\Roaming\Cosmos User Kit\Build\IL2CPU\XSharp.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="refs\" />
+    </ItemGroup>
+
+</Project>
